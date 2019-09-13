@@ -1,4 +1,4 @@
-package com.popkovanton.utils;
+package com.popkovanton.utils.sound;
 
 
 import android.annotation.SuppressLint;
@@ -65,7 +65,7 @@ public abstract class SoundCore implements LifecycleObserver {
     }
 
     private void createOldSoundPool() {
-        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        mSoundPool = new SoundPool(getMaxStreams(), AudioManager.STREAM_MUSIC, 0);
     }
 
     protected void createMap() {

@@ -1,10 +1,7 @@
-package com.popkovanton.utilssample.util;
+package com.popkovanton.utils.sound;
 
 
-import com.popkovanton.utils.ISoundInitialization;
-import com.popkovanton.utils.ISoundType;
-import com.popkovanton.utils.SoundTypeDefault;
-import com.popkovanton.utilssample.R;
+import com.popkovanton.utils.R;
 
 import java.util.HashMap;
 import java.util.Map;

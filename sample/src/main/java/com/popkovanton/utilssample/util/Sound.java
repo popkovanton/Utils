@@ -3,9 +3,10 @@ package com.popkovanton.utilssample.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.popkovanton.utils.ISoundInitialization;
-import com.popkovanton.utils.ISoundType;
-import com.popkovanton.utils.SoundCore;
+import com.popkovanton.utils.sound.ISoundInitialization;
+import com.popkovanton.utils.sound.ISoundType;
+import com.popkovanton.utils.sound.SoundCore;
+import com.popkovanton.utils.sound.SoundInitializationDefault;
 
 
 public class Sound extends SoundCore {
