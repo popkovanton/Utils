@@ -2,7 +2,6 @@ package com.popkovanton.utils.ui;
 
 import android.app.Activity;
 import android.graphics.Rect;
-import android.media.AudioManager;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -56,7 +55,6 @@ public class HideSystemUI implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private void hideUIAgain() {
         if (activity != null) {
-            activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
             activity.getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
