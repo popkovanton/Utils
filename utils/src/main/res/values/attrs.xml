@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RecomputeImageView">
+        <attr name="riv_translateY" format="float" />
+        <attr name="riv_translateX" format="float" />
+        <attr name="riv_scale" format="float" />
+        <attr name="riv_scaleT" format="enum">
+            <enum name="TOP" value="0" />
+            <enum name="BOTTOM" value="1" />
+            <enum name="MIDDLE" value="2" />
+            <enum name="CENTER_INSIDE" value="3" />
+            <enum name="CENTER_CROP" value="4" />
+            <enum name="FIT_CENTER" value="5" />
+            <enum name="FIT_END" value="6" />
+            <enum name="FIT_START" value="7" />
+            <enum name="FIT_XY" value="8" />
+        </attr>
+    </declare-styleable>
+</resources>
