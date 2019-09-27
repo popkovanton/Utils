@@ -10,7 +10,7 @@ public abstract class MusicCore {
     private boolean soundEnable = true;
     private boolean continueMusic = true;
     private MediaPlayer mp;
-    Context context;
+    protected Context context;
 
     protected abstract float getMusicVolume();
 
