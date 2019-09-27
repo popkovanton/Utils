@@ -19,11 +19,11 @@ public abstract class MusicCore {
     protected abstract int getMusicRes();
     protected abstract void setMusicRes(int resId);
 
-    protected final boolean isSoundEnable() {
+    public final boolean isSoundEnable() {
         return soundEnable;
     }
 
-    protected final boolean isContinueMusic() {
+    public final boolean isContinueMusic() {
         return continueMusic;
     }
 
