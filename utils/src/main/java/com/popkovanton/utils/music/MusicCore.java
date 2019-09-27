@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
 
-
 public abstract class MusicCore {
     private static final String TAG = "MusicCore";
 
@@ -15,7 +14,10 @@ public abstract class MusicCore {
 
     protected abstract float getMusicVolume();
 
+    protected abstract float getMusicVolumeRatio();
+
     protected abstract int getMusicRes();
+    protected abstract void setMusicRes(int resId);
 
     protected final boolean isSoundEnable() {
         return soundEnable;
@@ -55,7 +57,9 @@ public abstract class MusicCore {
                 mp.start();
             }
         } else {
-            mp = MediaPlayer.create(context, getMusicRes());
+            if(getMusicRes() != 0) {
+                mp = MediaPlayer.create(context, getMusicRes());
+            }
         }
 
         try {
@@ -69,8 +73,10 @@ public abstract class MusicCore {
 
     public void pause() {
         if (!continueMusic) {
-            if (mp.isPlaying()) {
-                mp.pause();
+            if (mp != null) {
+                if (mp.isPlaying()) {
+                    mp.pause();
+                }
             }
         }
     }
@@ -83,9 +89,44 @@ public abstract class MusicCore {
                     mp.stop();
                 }
                 mp.release();
+                mp = null;
+                setMusicRes(0);
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
+    public void reset() {
+        try {
+            if (mp != null) {
+                if (mp.isPlaying()) {
+                    mp.stop();
+                }
+                mp.reset();
+                mp = null;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
+    public void reduceVolume() {
+        if (isSoundEnable() && mp != null) {
+            mp.setVolume(getMusicVolume() / getMusicVolumeRatio(), getMusicVolume() / getMusicVolumeRatio());
+        }
+    }
+
+
+    public void increaseVolume() {
+        if (isSoundEnable() && mp != null) {
+            mp.setVolume(getMusicVolume() * getMusicVolumeRatio(), getMusicVolume() * getMusicVolumeRatio());
+        }
+    }
+
+    public void setDefaultVolume() {
+        if (isSoundEnable() && mp != null) {
+            mp.setVolume(getMusicVolume(), getMusicVolume());
         }
     }
 }

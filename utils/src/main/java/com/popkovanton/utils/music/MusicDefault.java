@@ -7,8 +7,6 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.popkovanton.utils.R;
-
 /**
  * Implementation to Activities onCreate with getLifecycle().addObserver(MusicDefault.getInstance(...));
  */
@@ -17,7 +15,7 @@ public class MusicDefault extends MusicCore implements
 
     @SuppressLint("StaticFieldLeak")
     private static MusicDefault musicDefault;
-    private int musicResDefault = R.raw.music_default;
+    private static int musicRes;
 
     public MusicDefault(Context context) {
         this.context = context;
@@ -30,20 +28,42 @@ public class MusicDefault extends MusicCore implements
         return musicDefault;
     }
 
+    public static MusicDefault getInstance(Context context, int sMusicResDefault) {
+        if (musicDefault == null) {
+            musicDefault = new MusicDefault(context);
+        }
+        musicRes = sMusicResDefault;
+        return musicDefault;
+    }
+
+    public void soundSwitch(){
+        setSoundEnable();
+        initSoundOnOff();
+    }
+
     @Override
     protected float getMusicVolume() {
         return 0.3f;
     }
 
     @Override
-    protected int getMusicRes() {
-        return musicResDefault;
+    protected float getMusicVolumeRatio() {
+        return 2.5f;
+    }
+
+    @Override
+    public int getMusicRes() {
+        return musicRes;
+    }
+
+    @Override
+    public void setMusicRes(int resId) {
+        musicRes = resId;
     }
 
     @Override
     public void setSoundEnable() {
         super.setSoundEnable();
-        initSoundOnOff();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
