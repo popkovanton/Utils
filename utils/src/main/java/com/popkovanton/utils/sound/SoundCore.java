@@ -169,6 +169,20 @@ public abstract class SoundCore implements LifecycleObserver {
         }
     }
 
+    protected void playRandomSound() {
+        if (randomSound != null && isSoundEnabled()) {
+            int randomElement = randomSound.get(new Random().nextInt(randomSound.size()));
+            mSoundPool.play(randomElement, getVolume(), getVolume(), 0, 0, 1);
+        }
+    }
+
+    protected void playRandomSound(int priority) {
+        if (randomSound != null && isSoundEnabled()) {
+            int randomElement = randomSound.get(new Random().nextInt(randomSound.size()));
+            mSoundPool.play(randomElement, getVolume(), getVolume(), priority, 0, 1);
+        }
+    }
+
     private int loadSound(Integer fileName, Context context) {
         return mSoundPool.load(context, fileName, 1);
     }
