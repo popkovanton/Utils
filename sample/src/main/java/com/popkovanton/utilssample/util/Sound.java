@@ -56,4 +56,14 @@ public class Sound extends SoundCore {
         return 0.5f;
     }
 
+    @Override
+    protected int getRandomSoundDelay() {
+        return 0;
+    }
+
+    @Override
+    protected int getRandomSoundPeriod() {
+        return 0;
+    }
+
 }
