@@ -35,12 +35,9 @@ public class SoundListAdapter extends RecyclerView.Adapter<SoundListAdapter.Elem
         View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.sound_list_element, parent, false);
         ElementsViewHolder viewHolder = new ElementsViewHolder(itemView);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (iSoundList != null) {
-                    iSoundList.onElementClick(musicList.get(viewHolder.getLayoutPosition()));
-                }
+        itemView.setOnClickListener(view -> {
+            if (iSoundList != null) {
+                iSoundList.onElementClick(musicList.get(viewHolder.getLayoutPosition()));
             }
         });
         return viewHolder;
@@ -56,7 +53,7 @@ public class SoundListAdapter extends RecyclerView.Adapter<SoundListAdapter.Elem
         return musicList.size();
     }
 
-    class ElementsViewHolder extends RecyclerView.ViewHolder {
+    static class ElementsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.musicName)
         TextView musicNameTV;
 

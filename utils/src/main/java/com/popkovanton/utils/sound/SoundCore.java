@@ -10,6 +10,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -22,6 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class SoundCore implements LifecycleObserver {
+    private final static String TAG = SoundCore.class.getSimpleName();
 
     @SuppressLint("StaticFieldLeak")
     private SoundPool mSoundPool;
@@ -87,6 +89,10 @@ public abstract class SoundCore implements LifecycleObserver {
     }
 
     protected void createMap() {
+        if (getContext() == null) {
+            Log.e(TAG, "Context == null. Try set the Application context");
+            return;
+        }
         if (map == null && getSoundInstruction() != null) {
             map = getSoundInstruction().getSoundMap();
             if (map != null) {
@@ -98,6 +104,10 @@ public abstract class SoundCore implements LifecycleObserver {
     }
 
     protected void createRandomSounds() {
+        if (getContext() == null) {
+            Log.d(TAG, "Context == null. Try set the Application context");
+            return;
+        }
         if (randomSound == null && getSoundInstruction() != null) {
             randomSound = getSoundInstruction().getRandomSoundArray();
             if (randomSound != null) {
@@ -109,6 +119,10 @@ public abstract class SoundCore implements LifecycleObserver {
     }
 
     protected void createRandomSoundsDelay() {
+        if (getContext() == null) {
+            Log.d(TAG, "Context == null. Try set the Application context");
+            return;
+        }
         if (randomSoundDelay == null && getSoundInstruction() != null) {
             randomSoundDelay = getSoundInstruction().getRandomSoundArrayWithDelay();
             if (randomSoundDelay != null) {
@@ -127,10 +141,10 @@ public abstract class SoundCore implements LifecycleObserver {
         return map;
     }
 
-    protected long getSoundDuration(ISoundType soundS){
+    protected long getSoundDuration(ISoundType soundS) {
         int duration;
         int soundRawId = getSoundWithKey(soundS);
-        if(soundRawId > 0) {
+        if (soundRawId > 0) {
             MediaPlayer player = MediaPlayer.create(getContext(), getSoundWithKey(soundS));
             duration = player.getDuration();
             player.release();
